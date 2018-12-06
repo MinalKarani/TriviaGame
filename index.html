@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Trivia Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <!-- Reset stylesheet -->
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- My Stylesheet -->
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link href='https://fonts.googleapis.com/css?family=Inconsolata:700' rel='stylesheet' type='text/css'>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Gentium+Basic" rel="stylesheet">
+</head>
+
+<body>
+        
+                <div class='container'>
+                    <div class="row lg">
+                        <button class='btn btn-primary' id='startBtn'>Start</button>
+                    </div>
+                        <!-- Question page -->
+                        <div class="row lg">
+                        <div id=timeLeft></div></div>
+                        <div class="row lg">
+                        <div id=currentQuestion></div></div>
+                        <div class="row lg">
+                        <div class='question'></div></div>
+                        <div class="row lg">
+                        <div class='answerList'></div></div>
+                        <!-- Answer Page -->
+                        <div class="row lg">
+                        <div id=message></div></div>
+                        <div id=correctedAnswer></div>
+                        <div id="gif"></div>
+                        <!-- Scoreboard -->
+                        <div id=finalMessage></div>
+                        <div id=correctAnswers></div>
+                        <div id=incorrectAnswers></div>
+                        <div id=unanswered></div>
+                        <div id='startOverBtn'></div>
+                    </div>
+        
+    <!-- JQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <!-- Latest compiled and minified JavaScript for bootstrap -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- Game logic -->
+  <script type="text/javascript" src="assets/javascript/app.js"></script>
+</body>
+
+</html>
