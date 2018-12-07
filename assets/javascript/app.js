@@ -64,7 +64,7 @@ Questions=[
 
 
 var intervalId;var nextintervalId;
-var time = 0;
+var time = 10;
 var clockRunning = false;
 var currentQuestion=0;
 var correctAnswers=0;var incorrectAnswers=0;var unanswered=0;
@@ -82,7 +82,7 @@ function StartGame(){
     console.log(i);
     $.each(Questions[i].answerOptions, function(index, character) {
     var choices = $('<div>');
-    choices.text(Questions[i].answerOptions[index]);
+    choices.html("<a href='#'>"+Questions[i].answerOptions[index]);
     choices.attr({'id': index });
     choices.addClass('options');
     $('.answerList').append(choices);
@@ -116,11 +116,7 @@ function StartGame(){
         }
     });
 
-    $(".options").onmouseover=function(){
-        console.log("HOVER");
-        options.css({"background-color":"green"});
-    };
-  
+      
 }
     $("#startBtn").show();
     $("#startBtn").on("click",function()
@@ -130,8 +126,8 @@ function StartGame(){
     });
 
     function reset() {
-        time=00;
-        $("#timeLeft").html("<h2> Time remaining 00:0"+time+"</h2>");
+        time=10;
+        $("#timeLeft").html("<h2> Time remaining 00:"+time+"</h2>");
              
     }
     function start() {
@@ -151,10 +147,11 @@ function StartGame(){
       }
       function count() {
 
-        time++;
-        $("#timeLeft").html("<h2> Time remaining 00:"+time+"</h2>");
+        time--;
         
-        if(time===15)
+        $("#timeLeft").html("<h2> Time remaining 00:0"+time+"</h2>");
+        
+        if(time===0)
         {
             
             $(".question").empty();
@@ -170,6 +167,7 @@ function StartGame(){
       {
           stop();
           reset();
+          $("#timeLeft").empty();
           $("#message").text(messageResult);
           console.log(i);
           var index=Questions[i].correctAnswer

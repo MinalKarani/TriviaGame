@@ -52,6 +52,13 @@ li{
   
 }
 
+a:hover{
+  background-color: yellow;
+}
+
+a
+{text-decoration: none!important;
+}
 /*@media screen and (max-width: 980px) {
     body {
       background-color: #333;
