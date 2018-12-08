@@ -63,23 +63,32 @@ Questions=[
 ];
 
 
-var intervalId;var nextintervalId;
+var intervalId;
 var time = 10;
 var clockRunning = false;
 var currentQuestion=0;
 var correctAnswers=0;var incorrectAnswers=0;var unanswered=0;
 var messageResult="";
+var answered;
 
+function newGame()
+{
+    $("#finalMessage").empty();
+    $("#correctAnswers").empty();
+    $("#incorrectAnswers").empty();
+    $("#unanswered").empty();
+    $("#startOverBtn").hide();
+    
+}
 function StartGame(){
     $("#message").empty();
     $("#gif").empty();
     $("#correctedAnswer").empty();
+    newGame();
     start();
-    
-    //i=Math.floor(Math.random() * Questions.length);;
+    answered=true;
     i=currentQuestion;
     $(".question").html(Questions[i].question);
-    console.log(i);
     $.each(Questions[i].answerOptions, function(index, character) {
     var choices = $('<div>');
     choices.html("<a href='#'>"+Questions[i].answerOptions[index]);
@@ -87,32 +96,34 @@ function StartGame(){
     choices.addClass('options');
     $('.answerList').append(choices);
     
-        //stop();
+        
     });
     
     $(".options").on("click",function(){
+        stop();
         var userAnswer=$(this).attr("id");
         var index=Questions[i].correctAnswer
-        console.log(userAnswer);
         $(".question").empty();
         $(".answerList").empty();
+        $(".options").empty();
 
-        if((Questions[i].answerOptions[userAnswer])===(Questions[i].answerOptions[index]))
+        if((Questions[i].answerOptions[userAnswer])===(Questions[i].answerOptions[index])&& (answered == true))
         {
-            console.log("Correct!!!!!!!");
+         
             correctAnswers++;
             messageResult="Correct Answer!!";
-            //stop();
             ShowAnswer();
             
     
         }
-        else
+        else if((Questions[i].answerOptions[userAnswer])!=(Questions[i].answerOptions[index])&& (answered == true))
         {
             incorrectAnswers++;
             messageResult="Incorrect Answer!!";
-            //reset();
             ShowAnswer();
+        }
+        else{
+            answered=true;
         }
     });
 
@@ -140,7 +151,6 @@ function StartGame(){
       }
       function stop() {
       
-        // DONE: Use clearInterval to stop the count here and set the clock to not be running.
         clearInterval(intervalId);
         
         clockRunning = false;
@@ -156,7 +166,10 @@ function StartGame(){
             
             $(".question").empty();
             $(".answerList").empty();
+            $(".options").empty();
             unanswered++;
+            answered=false;
+            stop();
             reset();
             messageResult="Time is up!!";
             ShowAnswer();
@@ -165,20 +178,17 @@ function StartGame(){
       }
       function ShowAnswer()
       {
-          stop();
           reset();
           $("#timeLeft").empty();
           $("#message").text(messageResult);
-          console.log(i);
           var index=Questions[i].correctAnswer
           $("#correctedAnswer").text("Correct Answer is: "+Questions[i].answerOptions[index]);
           console.log(Questions[i].url);
           $("#gif").html("<img src="+Questions[i].url+">");
-          //nextintervalId = setTimeout(showNextSet(), 500);
-          //clearInterval(nextintervalId);
+          
 
-          if(currentQuestion === (Questions.length-1)){
-            setTimeout(scoreboard, 2000)
+          if(currentQuestion === (Questions.length-1)){ 
+            setTimeout(scoreboard, 2000);
         } else{
             currentQuestion++;
             setTimeout(StartGame, 2000);
@@ -194,4 +204,21 @@ function StartGame(){
         $("#correctAnswers").text("Total Correct Answers:"+correctAnswers);
         $("#incorrectAnswers").text("Total InCorrect Answers:"+incorrectAnswers);
         $("#unanswered").text("Total Unaswerd:"+unanswered);
+        $("#startOverBtn").show();
+        
+        
       }
+      $("#startOverBtn").on("click",function()
+      {
+        currentQuestion=0;
+        correctAnswers=0;
+        incorrectAnswers=0;
+        unanswered=0
+        messageResult="";
+        StartGame();
+      })
+      
+        
+      
+
+      
